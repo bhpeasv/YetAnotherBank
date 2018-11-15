@@ -2,17 +2,51 @@
 
 namespace YetAnotherBank
 {
+    /// <summary>
+    ///     Class representing a BankAccount.
+    ///     The class contains methods for 
+    ///     <list type="bullet">
+    ///         <term>Deposit</term> <description>Deposits a positive amount to the Bank Account</description>
+    ///         <term>Withdraw></term> <description>Withdraws a positive amount from the Bank Account</description>
+    ///     </list>
+    ///     The class contains two constructors, one for creating a BankAccount with a zero balance,
+    ///     and another for creating a BankAccount with an initial positive balance.
+    /// </summary>
     public class BankAccount
     {
+        /// <summary>
+        ///     <value>The unique Id for the BankAccount</value>
+        /// </summary>
         public int Id { get; }
+
+        /// <summary>
+        ///     <value>The current balance</value>
+        /// </summary>
         public double Balance { get; private set; }
 
+        /// <summary>
+        ///     Creates an instance of the BankAccount with the given <paramref name="id"/>
+        ///     and <paramref name="initialBalance"/>
+        /// </summary>
+        /// <param name="id">
+        ///     The unique identifier
+        /// </param>
+        /// <param name="initialBalance">
+        ///     The initial balance
+        /// </param>
         public BankAccount(int id, double initialBalance)
         {
             Id = id;
             Balance = initialBalance;
         }
 
+        /// <summary>
+        ///     Creates an instance of the BankAccount with the given <paramref name="id"/>
+        ///     and a zero balance.
+        /// </summary>
+        /// <param name="id">
+        ///     The unique identifier
+        /// </param>
         public BankAccount(int id)
         : this(id, 0.0)
         {
