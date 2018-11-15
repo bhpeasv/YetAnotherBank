@@ -48,5 +48,27 @@ namespace XUnitTestProject
             var ex = Assert.Throws<ArgumentException>(() => acc.Deposit(amount));
             Assert.Equal("Amount must be greater than zero", ex.Message);
         }
+
+        [Theory]
+        [InlineData(123.45, 0.01)]
+        [InlineData(123.45, 123.45)]
+        public void WithdrawValidAmount(double initialBalance, double amount)
+        {
+            double expected = initialBalance - amount;
+            BankAccount acc = new BankAccount(1, initialBalance);
+            acc.Withdraw(amount);
+            Assert.Equal(expected, acc.Balance);
+        }
+
+        [Theory]
+        [InlineData(123.45, 0.00, "Amount must be greater than zero")]
+        [InlineData(123.45, -0.01, "Amount must be greater than zero")]
+        [InlineData(123.45, 123.46, "Amount cannot exceed the balance")]
+        public void WithdrawInvalidAmountExpectArgumentException(double initialBalance, double amount, string message)
+        {
+            BankAccount acc = new BankAccount(1, initialBalance);
+            var ex = Assert.Throws<ArgumentException>(() => acc.Withdraw(amount));
+            Assert.Equal(message, ex.Message);
+        }
     }
 }
